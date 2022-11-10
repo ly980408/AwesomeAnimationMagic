@@ -1,2 +1,2 @@
 # ScrollingMagic
-A collection of animation effects demo based on [Lax.js](https://github.com/alexfoxy/lax.js)
+A collection of animation demos based on [Lax.js](https://github.com/alexfoxy/lax.js)
