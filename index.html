@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrolling Magic</title>
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/attributify.global.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css"
+    />
+    <style>
+      html {
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        height: 100%;
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+      }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/lax.js"></script>
+    <script>
+      window.onload = function () {
+        lax.init();
+
+        // Add a driver that we use to control our animations
+        lax.addDriver(
+          'scrollY',
+          function () {
+            return document.documentElement.scrollTop;
+          },
+          {
+            inertiaEnabled: true,
+          }
+        );
+
+        // Add animation bindings to elements
+        lax.addElements('.hello', {
+          scrollY: {
+            translateX: [
+              ['elInY', 'elCenterY', 'elOutY'],
+              [0, 'pageWidth/2', 'pageWidth-20'],
+            ],
+            color: [
+              ['elInY', 'elCenterY', 'elOutY'],
+              [0, 100, 200],
+              {
+                cssFn: (val) => {
+                  return `rgba(${val},${200 - val},200,1)`;
+                },
+              },
+            ],
+          },
+        });
+
+        lax.addElements('.tips', {
+          scrollY: {
+            'letter-spacing': [
+              [0, 'screenHeight'],
+              [0, 20],
+              {
+                cssUnit: 'px',
+              },
+            ],
+            opacity: [
+              ['screenHeight*0.25', 'screenHeight*0.75'],
+              [1, 0.5],
+            ],
+          },
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div h-full text-center flex select-none all:transition-400>
+      <div ma>
+        <div
+          text-5xl
+          fw100
+          animate-bounce-alt
+          animate-count-infinite
+          animate-duration-1s
+        >
+          Scrolling Magic
+        </div>
+        <div op50 text-lg fw300 m4>
+          A collection of animation demos based on
+          <a
+            text-blue-700
+            hover=""
+            href="https://github.com/alexfoxy/lax.js"
+            target="_blank"
+          >
+            Lax.js
+          </a>
+        </div>
+        <div m2 flex justify-center text-2xl op30 hover="op80">
+          <a
+            i-carbon-logo-github
+            text-inherit
+            href="https://github.com/unocss/unocss"
+            target="_blank"
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div absolute bottom-5 right-0 left-0 text-center fw300 class="tips">
+      SCROLL DOWN
+    </div>
+
+    <div h-full bg-black>
+      <div class="hello" inline-block text-white text-xl fw500>Hello</div>
+    </div>
+  </body>
+</html>
