@@ -1,2 +1,3 @@
-# ScrollingMagic
-A collection of animation demos based on [Lax.js](https://github.com/alexfoxy/lax.js)
+# Awesome Animation Magic
+
+> A collection of animation demos, powered by canvas, [lax.js](https://github.com/alexfoxy/lax.js), .etc

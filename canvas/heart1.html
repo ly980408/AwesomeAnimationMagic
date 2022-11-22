@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+      /**
+       *
+       * 方程：
+       * var x = 16 * pow(sin(t), 3)
+       * var y = 13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t)
+       *
+       */
+      
+      window.onload = function () {
+        const canvas = document.getElementById('canvas');
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        const ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'red';
+
+        let d = 0;
+        let d2 = 0;
+        function draw() {
+          if (d < 180) {
+            d += 1;
+            let x = 16 * Math.pow(Math.sin((d * Math.PI) / 180), 3);
+            let y =
+              13 * Math.cos((d * Math.PI) / 180) -
+              5 * Math.cos((2 * d * Math.PI) / 180) -
+              2 * Math.cos((3 * d * Math.PI) / 180) -
+              Math.cos((4 * d * Math.PI) / 180);
+
+            ctx.fillRect(-x * 10 + canvasWidth / 2, -y * 10 + canvasHeight / 2, 2, 2);
+          }
+          if (d2 < 180) {
+            d2 += 1;
+            let x = 16 * Math.pow(Math.sin((d2 * Math.PI) / 180), 3);
+            let y =
+              13 * Math.cos((d2 * Math.PI) / 180) -
+              5 * Math.cos((2 * d2 * Math.PI) / 180) -
+              2 * Math.cos((3 * d2 * Math.PI) / 180) -
+              Math.cos((4 * d2 * Math.PI) / 180);
+
+            ctx.fillRect(x * 10  + canvasWidth / 2, -y * 10 + canvasHeight / 2, 2, 2);
+          }
+        }
+
+        function step() {
+          if (d >= 180 || d2 >= 180) return;
+          draw();
+          window.requestAnimationFrame(step);
+        }
+
+        window.requestAnimationFrame(step);
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="600"></canvas>
+  </body>
+</html>
